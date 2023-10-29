@@ -28,7 +28,8 @@ def extract_urls_from_file(file_path):
 # Function to validate URLs against the target host with a proxy
 def validate_urls(urls,session, proxy=None):
     for url in urls:
-        full_url = f'https://{target_host}{url}' if not url.startswith('/') else f'https://{target_host}{url}'  # Add a slash if missing
+        #full_url = f'https://{target_host}{url}' if not url.startswith('/') else f'https://{target_host}{url}'
+        full_url = f'https://{target_host}/{url.lstrip("/")}' if not url.startswith('/') else f'https://{target_host}{url}'# Add a slash if missing
         try:
             response = requests.head(full_url, proxies=proxy)
             status_code = response.status_code
